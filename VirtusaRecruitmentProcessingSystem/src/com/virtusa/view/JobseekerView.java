@@ -48,6 +48,8 @@ Scanner scanner=new Scanner(System.in);
 		// TODO Auto-generated method stub
 		Scanner s=new Scanner(System.in);
 		System.out.println("\n1.JobSeeker Registration\n2.JobSeeker Login\n3.Back");
+		System.out.print("-:>Enter Your Choice:");
+		
 		int option=s.nextInt();
 		
 		JobseekerView js_view=new JobseekerView();

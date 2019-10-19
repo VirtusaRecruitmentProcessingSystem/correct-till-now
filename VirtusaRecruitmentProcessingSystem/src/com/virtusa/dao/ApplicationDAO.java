@@ -224,6 +224,10 @@ EXPERIENCE	int(2)
 		
 		ResultSet retriveSet=retriveStatement.executeQuery();
 		
+		if(retriveSet.next()==false)
+			System.out.println("Sorry, there are no applications to short list");
+		else {
+		
 		while(retriveSet.next()) {
 	     
 			jobseekerID=retriveSet.getInt("JOBSEEKER_ID");
@@ -258,6 +262,7 @@ EXPERIENCE	int(2)
 			dataUntouched.add(appliedModel);
 
 		}	
+		}
 	}
 		catch(Exception e) {	System.out.println("error at applying dao");
 		e.printStackTrace();
