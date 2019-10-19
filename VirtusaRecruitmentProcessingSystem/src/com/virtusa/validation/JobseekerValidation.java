@@ -1,8 +1,13 @@
 
 package com.virtusa.validation;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.virtusa.integrate.ConnectionManager;
 
 public class JobseekerValidation {
 
@@ -87,6 +92,29 @@ public boolean validString(String val) {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean validJobPost(int jobPostID) {
+		
+		boolean result=false;
+		
+		try(Connection conn=ConnectionManager.openConnection();){
+		String tre="select * from job_description where jobpost_id=?";
+        PreparedStatement staw=conn.prepareStatement(tre);
+        staw.setInt(1,jobPostID);
+        
+        boolean xx=staw.execute();
+        if(xx)
+        	result= true;
+        else 
+        	result= false;
+        
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
+return result;
 	}
 	
 }

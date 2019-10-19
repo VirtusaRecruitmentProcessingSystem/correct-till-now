@@ -70,7 +70,7 @@ public class AdminView {
 		AdminController adcontroller=new AdminController();
 		String ss;
 		boolean bill;
-		Scanner scanner=new Scanner(System.in);
+		Scanner scannerr=new Scanner(System.in);
 
 		if(sf.isStatus()) {
 			/*
@@ -90,7 +90,7 @@ public class AdminView {
 				System.out.println("5.LogOut");
 				System.out.print("\nEnter your choice:");
 				
-				ss=scanner.next();
+				ss=scannerr.nextLine();
 					bill=jv.validNumber(ss);
 					if(!bill)
 						choice=Integer.parseInt(ss);
@@ -117,7 +117,7 @@ public class AdminView {
 			}
 			while(choice!=5);
 		}
+		scannerr.close();
+}
 	
-
-
-}}
+}

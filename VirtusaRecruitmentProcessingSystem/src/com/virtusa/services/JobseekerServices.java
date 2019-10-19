@@ -4,5 +4,5 @@ import com.virtusa.model.JobseekerModel;
 
 public interface JobseekerServices{
 	public int JobseekerRegistration(JobseekerModel model);
-	public void JobseekerLogin();
+	public void viewStatus(int refId);
 }

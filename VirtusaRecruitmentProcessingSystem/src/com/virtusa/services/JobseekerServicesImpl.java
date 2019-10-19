@@ -14,12 +14,8 @@ int jobs_id;
 		//System.out.println("Added Succesfully");
 	}
 
-	@Override
-	public void JobseekerLogin() {
-		// TODO Auto-generated method stub
-		
-	}
 
+	@Override
 	public void viewStatus(int refId) {
 		JobseekerDAO jdao=new JobseekerDAO();
 		jdao.showStatus(refId);

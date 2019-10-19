@@ -14,7 +14,7 @@ YEAR_OF_PASSING  int(4) NOT NULL,
 JOBSEEKER_ID int(6) AUTO_INCREMENT PRIMARY KEY,
 PERCENTAGE     numeric(2),
 EXPERIENCE             int(2))
-AUTO_INCREMENT=8066900;
+AUTO_INCREMENT=9870;
 
 
 create table job_description(jobpost_id INT(6) primary key ,
@@ -40,7 +40,7 @@ JOBSEEKER_ID int(6),
 JOBPOST_ID INT(6),
 EXPERIENCE int(2),
 constraint fkey foreign key (jobpost_id) references job_description(jobpost_id),
-constraint f_key foreign key (JOBSEEKER_ID) references JOBSEEKER(JOBSEEKER_ID)) AUTO_INCREMENT=1234567890;
+constraint f_key foreign key (JOBSEEKER_ID) references JOBSEEKER(JOBSEEKER_ID)) AUTO_INCREMENT=1230;
 
  
 
@@ -116,3 +116,6 @@ insert into employee_credentials values('admin','admin','admin');
  insert into job_description values ( 100,'Developer',1,60,' java sql');
   commit;
 desc applications;
+
+select * from applications;
+select * from application_and_status;

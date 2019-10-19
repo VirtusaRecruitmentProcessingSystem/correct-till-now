@@ -124,6 +124,11 @@ EXPERIENCE	int(2)
 			st.setInt(11,JOBSEEKER_ID );
 			st.setInt(12, jobpostId);
 			st.setInt(13, experience);
+			
+
+			
+			
+			
 			int response=st.executeUpdate();
 			//////////////
 			
@@ -138,6 +143,7 @@ EXPERIENCE	int(2)
             
             while(asd.next())
             REFERENCE_ID=asd.getInt("REFERENCE_ID");
+            
             
 			//retrieve reference id from mysql
 			
@@ -168,6 +174,7 @@ EXPERIENCE	int(2)
 			if(response>0) {
 				//System.out.println("DOne!! Applied SuccessFully-----Stored Succesfully");
 				boo=true;
+				System.out.println("Reference ID for your application is :->"+REFERENCE_ID);
 		}
 			else
 				boo=false;
@@ -217,19 +224,19 @@ EXPERIENCE	int(2)
 		
 		List<ApplicationModel> dataUntouched=new ArrayList<>();
 		
-		try(Connection retrieve=ConnectionManager.openConnection();){
+		try(Connection retrieve=ConnectionManager.openConnection();)
+	{
 			
 		String retrieveString="select * from applications";
 		PreparedStatement retriveStatement=retrieve.prepareStatement(retrieveString);
 		
 		ResultSet retriveSet=retriveStatement.executeQuery();
 		
-		if(retriveSet.next()==false)
+		if(retriveSet.next() == false)
 			System.out.println("Sorry, there are no applications to short list");
 		else {
-		
-		while(retriveSet.next()) {
-	     
+			do
+			 	{
 			jobseekerID=retriveSet.getInt("JOBSEEKER_ID");
 			fname=retriveSet.getString("FIRST_NAME");
 			mname=retriveSet.getString("MIDDLE_NAME");
@@ -261,7 +268,8 @@ EXPERIENCE	int(2)
 			
 			dataUntouched.add(appliedModel);
 
-		}	
+		}while( retriveSet.next() );
+			
 		}
 	}
 		catch(Exception e) {	System.out.println("error at Retrieving  Applications at retrieveAllApplications() ");

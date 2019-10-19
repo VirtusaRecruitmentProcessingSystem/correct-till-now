@@ -38,6 +38,9 @@ EXPERIENCE               NUMBER(2)
 
 public class JobseekerView {
 //
+	
+	
+	JobseekerValidation validator=new JobseekerValidation(); 		
 	static boolean flag=false;
 Scanner scanner=new Scanner(System.in);
 	int jobs_id;
@@ -74,7 +77,7 @@ Scanner scanner=new Scanner(System.in);
 	}
 	
 	public void registerJobSeeker() {
-		JobseekerValidation validator=new JobseekerValidation(); 		
+		
 		
 		//////////////////////
 		String firstName;
@@ -278,8 +281,25 @@ Scanner scanner=new Scanner(System.in);
 
 	public void MenuAfterLogin(SessionForwading sf) {
 		Scanner s=new Scanner(System.in);
+		String sar;
+		int choice=0;
+		do {
+			
+		
 		System.out.println("\n1.Apply for Job\n2.View Job Application Status\n3.log out");
-		int choice=s.nextInt();
+		sar=scanner.next();
+		flag=validator.validNumber(sar);
+		if(!flag)
+		choice=Integer.parseInt(sar);
+		else {
+			System.out.println("---------Enter input in Valid Number Format--------------\n");
+			flag=true;
+			}
+		}while(flag);
+		
+		
+		
+		
 		switch(choice) {
 		case 1:applyJob(sf);
 				break;
@@ -437,6 +457,7 @@ while(!flag);
 
 System.out.println("Enter Phone Number:");
 String phone;
+boolean bool;
 phone=scanner.next();
 
 
@@ -444,8 +465,18 @@ System.out.println("Enter graduation percentage:");
 String percString=scanner.next();
 float percentagef=Float.parseFloat(percString);
 //float percentage=scanner.nextFloat();
+int jobpostId;
+		do {
 		System.out.println("Enter jobpostId:");
-		int jobpostId=scanner.nextInt();
+		jobpostId=scanner.nextInt();
+		
+		bool=validator.validJobPost(jobpostId);
+		if(!bool)
+			System.out.println("JobPost with ID:"+jobpostId+"  doesn't exist\n Enter a valid job post ID");
+		}
+		while(!bool);
+		
+		
 		
 		ApplicationModel application=new ApplicationModel
 				(firstName,middleName,lastName,datex,phone,qualification,email
