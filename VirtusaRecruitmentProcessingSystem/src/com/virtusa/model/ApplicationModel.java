@@ -23,7 +23,8 @@ public class ApplicationModel {
 	//firstName,mName,lName,datex,phone,qualification,email,passYear,jobId,percentage,experience,address,skills
 	
 	
-	public ApplicationModel(String fname, String mname, String lname, Date datex, String phone,String qualification, String email, int passYear,int jobpostId,
+	public ApplicationModel(String fname, String mname, String lname, Date datex, String phone,String qualification, String email, 
+			int passYear,int jobpostId,
 			float percentage, int experience,String address,List<String> skills) {
 		// TODO Auto-generated constructor stub
 		this.fname=fname;
@@ -37,6 +38,8 @@ public class ApplicationModel {
 		this.phone=phone;
 		this.qualification=qualification;
 		this.skills=skills;
+		this.passYear=passYear;
+		this.percentage=percentage;
 	}
 	
 	
@@ -212,9 +215,4 @@ public class ApplicationModel {
 	}
 
 
-
-
-	
-	
-	
 }
