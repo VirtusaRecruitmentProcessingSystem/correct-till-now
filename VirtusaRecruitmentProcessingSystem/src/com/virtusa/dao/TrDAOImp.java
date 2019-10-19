@@ -5,26 +5,42 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 import com.virtusa.entities.JobseekerEntity;
 import com.virtusa.integrate.ConnectionManager;
 import com.virtusa.model.ASLModel;
+import com.virtusa.model.JobseekerModel;
 import com.virtusa.view.TRView;
 
 public class TrDAOImp 
 {
 
-		public void  TrShortlist()
+	
+	
+	
+	
+		public boolean  TrShortlist()
 		{
+			boolean result=false;
 			try(Connection connection=ConnectionManager.openConnection();){
 				//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
 				
 				
 				String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'";
-				PreparedStatement ps=connection.prepareStatement(st);				
+				PreparedStatement ps=connection.prepareStatement(st);	
+				
 				ResultSet rs=ps.executeQuery();
+				if(rs.next()==false) {
+				//	System.out.println(" Sorry,there are no Applications shorlisted by Admin\n Contact Admin or Please wait for further Instructions");
+					result=false;
+				}
+			
+			else {
+				
 				
 				System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
 				
@@ -40,18 +56,60 @@ public class TrDAOImp
 					if(q>0)
 						System.out.println("TR Status succesfully updated for Applicant:"+rs.getInt("REFERENCE_ID"));
 					else
-						System.out.println("Status updation failed:");
-							
+						System.out.println("TR's Status updation failed:");
+			
+					}
+				 result=true;
 				}
-				
-				
+			
 			}
-			catch(Exception e) {}
-				
-		}	
+			catch(Exception e) {System.out.println("error at TrShortlist() in TrDAOImp");}
+			return result;
+		
+		}
 			
 		
-		
+		public List<ASLModel> getAllJobSeekers(){
+		/*	
+			 String fname;
+			 String mname;
+			 String lname;
+			 Date datex;
+			 int passYear;
+			 int experience;
+			 String address;
+			 String qualification;
+			 String email;
+			 String phone;
+			 float percentage;
+			 String uname;
+			 String password;
+			 List<String> skills;
+		*/	
+			 ASLModel jm;
+			 List<ASLModel> data=new ArrayList<>();
+				
+				try(Connection connection=ConnectionManager.openConnection();){
+					String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'";
+					PreparedStatement ps=connection.prepareStatement(st);				
+					ResultSet rs=ps.executeQuery();
+					//List<JobseekerModel> data=new ArrayList<>();
+					if(rs.next()==false) {
+						System.out.println(" Sorry,there are no Applications shorlisted by Admin\n Contact Admin or Please wait for further Instructions");
+					}else if(rs.next()==true)
+					{
+						jm=new ASLModel(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
+						data.add(jm);
+					}
+					
+					
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Error at Viewing Applications List:");
+				}
+			return data;
+		}
 		
 	
 		

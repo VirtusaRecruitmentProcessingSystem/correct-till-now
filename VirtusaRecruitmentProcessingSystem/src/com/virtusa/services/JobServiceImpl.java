@@ -49,7 +49,7 @@ public class JobServiceImpl implements jobServices {
 			System.out.println(" Enter Job ID:");
 			jobId=input.nextInt();
 			System.out.println(" Enter Job Role:");
-			designation=input.next();
+			designation=input.nextLine();
 			
 			System.out.println("\n1.Java\n2.SQL\n3.Data Science\n4.Testing\n5.Exit");
 			
@@ -72,7 +72,7 @@ public class JobServiceImpl implements jobServices {
 			case 4:skills.add("testing");
 					break;
 			case 5: break;
-			
+			default:System.out.println("---*--- Enter Valid Skill Selection ---*---");
 			//default:skills.add("c");
 				}
 			

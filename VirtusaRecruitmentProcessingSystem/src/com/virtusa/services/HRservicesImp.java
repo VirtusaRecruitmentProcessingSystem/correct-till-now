@@ -11,65 +11,61 @@ import com.virtusa.helper.FactoryHrHelper;
 import com.virtusa.model.ASLModel;
 import com.virtusa.model.JobseekerModel;
 
-public class HRservicesImp {
+public class HRservicesImp implements HRServices{
 	private HrDAOImp hrdao;
+	boolean result=false;
+	
 	public HRservicesImp()
 	{
 		this.hrdao=FactoryHrHelper.createHRDAO();
 		
 	}
-	/*	public List<JobseekerModel> getTrShortlistedList(){
-			List<JobseekerModel>jobseekerModelList=new ArrayList<>();
-			List<JobseekerEntity>jobseekerList;
-			try {
-				jobseekerList=hrdao.getTrShortlistedList();
-				for(JobseekerEntity jobseekermodel :jobseekerList)
-				{
-					JobseekerModel jobseekerModel=new JobseekerModel();
-					jobseekerModel.setFname(jobseekermodel.getFirst_name());
-					jobseekerModel.setMname(jobseekermodel.getMiddle_name()); 
-					jobseekerModel.setLname(jobseekermodel.getLast_name());
-					//jobseekerModel.setDatex(jobseekermodel.getDatex());
-					jobseekerModel.setEmail(jobseekermodel.getEmailid());
-					//jobseekerModel.setPassYear(jobseekermodel.getPassYear());
-					//jobseekerModel.setPercentage(jobseekermodel. getPercentage());
-					//jobseekerModel.setQualification(jobseekermodel. getQualification());
-					//jobseekerModel.setPhone(jobseekermodel.getPhone());
-					jobseekerModelList.add(jobseekerModel);
-				}
-			}catch(ClassNotFoundException |SQLException e) {
-				e.printStackTrace();
-			}
-			return jobseekerModelList;
-			// TODO Auto-generated method stub
-			
-		}
-	
-		public List<JobseekerEntity> HrShortlist() {
-			List<ASLModel>shortlist=new ArrayList<>();
-			List<JobseekerEntity>jobseekerList;
-	try {
-		jobseekerList=hrdao.HrShortlist();
-		for(JobseekerEntity jobseekersssss:jobseekerList)
+
+	public boolean HrShortlist() {
+
+		
+		List<ASLModel>jobseekerModelList=new ArrayList<>();
+
+		jobseekerModelList=hrdao.getAllJobSeekers();
+		if(jobseekerModelList.isEmpty()) 
 		{
-			ASLModel aslmodel=new ASLModel();
-			aslmodel.setJobseekerId(jobseekers.getJobseekerId());
-			aslmodel.setHrStatus(jobseekers.getHrStatus());
-			shortlist.add(aslmodel);
-		} 
-
-	}catch(ClassNotFoundException |SQLException e) {
-		e.printStackTrace();
+			System.out.println(" Sorry,there are no Applications to ShortList\n Contact Admin or Please wait for further Instructions");
+			result=false;
+		}
+	else
+		{
+		result=hrdao.HrShortlist();
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getTrShortlistedList() {
+		// TODO Auto-generated method stub
+		List<ASLModel>jobseekerModelList=new ArrayList<>();
+		jobseekerModelList=hrdao.getAllJobSeekers();
+		if(jobseekerModelList.isEmpty()) {
+			System.out.println(" Sorry,there are no Applications to view\n Contact Admin or Please wait for further Instructions");
+			result=false;
+		}
+	else
+	{
+		for(ASLModel jobseekermodel :jobseekerModelList)
+		{
+			System.out.println("\n|REFERENCE_ID|JOBSEEKER_ID||jobpost_id||admin_status||tr_status||hr_status|" );
+			System.out.println(jobseekermodel.getReference_id()+"|"+jobseekermodel.getJobseekerId()+"|"+jobseekermodel.getJobpostId()+"|"+jobseekermodel.getAdminStatus()+"|"+jobseekermodel.getTrStatus()+"|"+jobseekermodel.getHrStatus()+"|");
+			result=true;
+		}	
+	}
+		return result;	
 	}
 
-			return shortlist;
-
-	}
-
+	@Override
 	public void rate_comment() {
 		// TODO Auto-generated method stub
 		
 	}
-*/
+
+
 }
  

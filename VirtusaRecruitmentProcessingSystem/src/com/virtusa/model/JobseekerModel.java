@@ -21,21 +21,12 @@ public class JobseekerModel {
 	private List<String> skills;
 
 	
-	public List<String> getSkills() {
-		return skills;
-	}
-
-
-
-	public void setSkills(List<String> skills) {
-		this.skills = skills;
-	}
-
-
-
-	public JobseekerModel(String fname, String mname, String lname, Date datex, int passYear, int experience,
-			String address, String qualification, String email, String phone, float percentage, String uname,
-			String password,List<String> skills) {
+	public JobseekerModel(String fname, String mname, String lname,
+			Date datex, int passYear, int experience,
+			String address, String qualification, 
+			String email, String phone, float percentage, 
+			String uname,String password,
+			List<String> skills) {
 		// TODO Auto-generated constructor stub
 		this.fname=fname;
 		this.mname=mname;
@@ -52,10 +43,7 @@ public class JobseekerModel {
 		this.percentage=percentage;
 		this.passYear=passYear;
 	
-	
-	
 	}
-
 
 
 	public String getFname() {
@@ -63,11 +51,19 @@ public class JobseekerModel {
 	}
 
 
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
 
 	public String getMname() {
 		return mname;
 	}
 
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 
 
 	public String getLname() {
@@ -75,19 +71,29 @@ public class JobseekerModel {
 	}
 
 
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
 
 	public Date getDatex() {
 		return datex;
 	}
 
 
-
-	public int getPassYear() {
-		
-		return passYear;
-	
+	public void setDatex(Date datex) {
+		this.datex = datex;
 	}
 
+
+	public int getPassYear() {
+		return passYear;
+	}
+
+
+	public void setPassYear(int passYear) {
+		this.passYear = passYear;
+	}
 
 
 	public int getExperience() {
@@ -95,11 +101,19 @@ public class JobseekerModel {
 	}
 
 
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 
 	public String getQualification() {
@@ -107,11 +121,19 @@ public class JobseekerModel {
 	}
 
 
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 
 	public String getPhone() {
@@ -119,11 +141,19 @@ public class JobseekerModel {
 	}
 
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 
 	public float getPercentage() {
 		return percentage;
 	}
 
+
+	public void setPercentage(float percentage) {
+		this.percentage = percentage;
+	}
 
 
 	public String getUname() {
@@ -131,10 +161,32 @@ public class JobseekerModel {
 	}
 
 
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
 
 	public String getPassword() {
 		return password;
 	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public List<String> getSkills() {
+		return skills;
+	}
+
+
+	public void setSkills(List<String> skills) {
+		this.skills = skills;
+	}
+
+
+
 
 
 

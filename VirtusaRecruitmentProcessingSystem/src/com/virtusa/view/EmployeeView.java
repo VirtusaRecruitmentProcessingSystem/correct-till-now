@@ -2,11 +2,14 @@ package com.virtusa.view;
 
 import java.util.Scanner;
 
+import com.virtusa.model.SessionForwading;
 import com.virtusa.ui.VRPSHome;
 import com.vrps.authentication.AuthenticationView;
 
 public class EmployeeView {
 
+	SessionForwading sf;
+	
 	public void main() {
 		
 		System.out.println("\n---------Employee Login Module-------");
@@ -15,12 +18,19 @@ public class EmployeeView {
 		//EmployeeAuth.employeeAuth();
 		
 		AuthenticationView empAuth=new AuthenticationView();
-		empAuth.main(2);
+		sf=empAuth.main(2);
+		if(!sf.isStatus()) {
+			System.out.println("\nEmployee Authentication Failed");
+			mainMenu();
+		}
+			
 		
 	}
 	public void mainMenu() {
-		System.out.println("------------Employee------------\n1.Employee Login \n2.Back");
+		System.out.println("------------Employee------------\n[->]1.Employee Login \n[->]2.Back");
 		Scanner sc=new Scanner(System.in);
+		System.out.print("-:>Enter Your Choice:");
+		
 		int y=sc.nextInt();
 		
 		if(y==1)

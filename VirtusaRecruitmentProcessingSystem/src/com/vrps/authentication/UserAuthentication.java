@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import com.virtusa.integrate.ConnectionManager;
+import com.virtusa.model.LoginModel;
 import com.virtusa.model.SessionForwading;
 import com.virtusa.view.AdminView;
 import com.virtusa.view.HRView;
@@ -17,12 +18,12 @@ import com.virtusa.view.TRView;
 
 public class UserAuthentication {
 
-	//;
+
 	
-	public  SessionForwading Verification(String username,String password,int option){
+	public  SessionForwading Verification(LoginModel lm,int option){
 		int jobsee=0;
   	  boolean result=false;
-		
+  	String username=lm.getUsername(), password=lm.getPassword();
 		
 		try (Connection con=ConnectionManager.openConnection();)
 {   
@@ -94,7 +95,7 @@ public class UserAuthentication {
 			         		 System.out.println("Employee Authentication Failed");
 			         		//sf=new SessionForwading(jobsee,result);
 			         		  result=false;
-			         		  
+			         		  break;
 			         	  			}
 				        
 				     }
@@ -139,6 +140,7 @@ public class UserAuthentication {
 				        	   System.out.println("Admin Authentication Failed");
 				        	   result=false;
 				        	 //  sf=new SessionForwading(jobsee,result);
+				        	   break;
 		         		  			}
 				      }
 				    //  return result;
@@ -152,9 +154,8 @@ public class UserAuthentication {
 			         e.printStackTrace();
 		      }
 		SessionForwading sf=new SessionForwading(jobsee,result);
-		System.out.print("----result--"+sf.isStatus());
-		
-		  return sf;	
+		System.out.print("\n\n----result at  UserAuthentication--"+sf.isStatus()+"\n");
+		return sf;	
 		}
 
 

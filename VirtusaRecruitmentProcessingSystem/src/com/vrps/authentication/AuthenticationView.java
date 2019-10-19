@@ -2,6 +2,7 @@ package com.vrps.authentication;
 
 import java.util.Scanner;
 
+import com.virtusa.model.LoginModel;
 import com.virtusa.model.SessionForwading;
 
 
@@ -13,8 +14,7 @@ public class AuthenticationView {
 		public SessionForwading main(int option) {
 		// TODO Auto-generated method stub
 
-		String username=null;
-		String password=null;
+		
 		System.out.println();
 		Scanner scanner1=new Scanner(System.in);
 		System.out.print("Enter UserName:");
@@ -22,10 +22,14 @@ public class AuthenticationView {
 		System.out.print("Enter Password:");
 		String password1=scanner1.next();
 	
+
+		LoginModel lm=new LoginModel(username1,password1);
+		System.out.print(lm.getUsername()+"/-user-"+lm.getPassword()+"/paff-------auht view");
+		
 		UserAuthentication auth=new UserAuthentication();
 		
 		// boolean result;
-		 SessionForwading sf =auth.Verification(username1,password1,option );
+		SessionForwading sf =auth.Verification(lm,option );
 		 System.out.print("----result--"+sf.isStatus());
 		 return sf;
 	// System.out.print(result);

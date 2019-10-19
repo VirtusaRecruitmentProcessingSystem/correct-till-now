@@ -38,12 +38,18 @@ public List<ApplicationModel> getApplications() {
 
 
 
-	public void AdminShortlistServices() {
+	public boolean AdminShortlistServices() {
 		// TODO Auto-generated constructor stub
 		List<ApplicationModel> dataSL=new ArrayList<>();
 		dataSL=appDAO.retrieveAllApplications();
 		
-				Scanner scan=new Scanner(System.in);
+		if(dataSL.isEmpty()) {
+			System.out.println("Sorry, There are no applications to ShortList yet!");
+			return true;
+		}
+		else
+		{
+			try(Scanner scan=new Scanner(System.in);){
 		
 		System.out.println("REFERENCE_ID	|	NAME	|	DATE_OF_BIRTH	|	QUALIFICATION	|		SKILLS		|YEAR_OF_PASSING|PERCENTAGE|EXPERIENCE|JOBPOST_ID");
 		
@@ -68,8 +74,9 @@ public List<ApplicationModel> getApplications() {
 			aDAO.shortlistCandidatesDAO(slModel);
 			
 		});
-		
-				
+		}
 	}
-	
+return true;					
+	}
+		
 }

@@ -1,5 +1,7 @@
 package com.virtusa.ui;
 import java.util.Scanner;
+
+import com.virtusa.validation.JobseekerValidation;
 import com.virtusa.view.AdminView;
 import com.virtusa.view.EmployeeView;
 import com.virtusa.view.JobseekerView;
@@ -13,11 +15,21 @@ public static void main(String args[])
 	System.out.println("|---------- VIRTUSA RECRUITMENT PROCESSING SYSTEM ----------|");
 	System.out.println("<-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><->");
 	
-	int  i;
+	int  i=0;String ss;
+	boolean bill=false;
+	JobseekerValidation jv=new JobseekerValidation();
 	Scanner s=new Scanner(System.in);
-	System.out.println("\n1.JobSeeker\n2.Employee\n3.Admin");
-	System.out.print("-:>Enter Your Choice:");
-	i=s.nextInt();
+	
+	
+	do {
+		System.out.println("\n[->]1.JobSeeker\n[->]2.Employee\n[->]3.Admin\n[->]4.Exit");
+		System.out.print("-:>Enter Your Choice:");
+		ss=s.next();
+		bill=jv.validNumber(ss);
+		if(!bill)
+			i=Integer.parseInt(ss);
+		
+		}while(bill);
 	
 	if(i==1)
 	{
@@ -33,6 +45,10 @@ public static void main(String args[])
 	{
 		AdminView aview=new AdminView();
 		aview.mainMenu();
+	}
+	else if(i==4)
+	{
+		System.exit(1);
 	}
 	s.close();
 	}

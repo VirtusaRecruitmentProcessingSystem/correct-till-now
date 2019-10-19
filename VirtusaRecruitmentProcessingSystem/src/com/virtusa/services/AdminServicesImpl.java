@@ -10,7 +10,11 @@ public class AdminServicesImpl implements AdminServices{
 	
 	AdminDAO adminDAO=new AdminDAO();
 
-
+	public boolean AdminShortlistServices() {
+		ApplicationServices admins=new 	ApplicationServices();
+		boolean b=admins.AdminShortlistServices();
+		return b;
+	}
 
 	@Override
 	public void rate_comment() {

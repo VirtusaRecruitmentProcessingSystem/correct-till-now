@@ -6,48 +6,59 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.virtusa.entities.JobseekerEntity;
 import com.virtusa.integrate.ConnectionManager;
+import com.virtusa.model.ASLModel;
 import com.virtusa.view.HRView;
 
 public class HrDAOImp
 {
 
-	public void  HrShortlist()
+	public boolean  HrShortlist()
 	{
-
-	try(Connection connection=ConnectionManager.openConnection();){
-		//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
-		
-		
-		String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes' and TR_STATUS='yes'";
-		PreparedStatement ps=connection.prepareStatement(st);				
-		ResultSet rs=ps.executeQuery();
-		
-		System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
-		
-		while(rs.next()) {
-			System.out.println(rs.getInt("REFERENCE_ID")+"\t"+rs.getInt("JOBSEEKER_ID"));
-			System.out.println("Select this Candidate(Yes/No):");
-			Scanner s=new Scanner(System.in);
-			String stat=s.next();
+		boolean result=false;
+		try(Connection connection=ConnectionManager.openConnection();){
+			//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
 			
-			String set="update application_and_status set HR_STATUS='yes' where REFERENCE_ID=?";
-			PreparedStatement ps1=connection.prepareStatement(set);				
-			int q=ps1.executeUpdate();
-			if(q>0)
-				System.out.println("HR Status succesfully updated for Applicant:"+rs.getInt("REFERENCE_ID"));
-			else
-				System.out.println("Status updation failed:");
-					
-		}
+			
+			String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'  and TR_STATUS='yes'";
+			PreparedStatement ps=connection.prepareStatement(st);	
+			
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()==false) {
+			//	System.out.println(" Sorry,there are no Applications shorlisted by Admin\n Contact Admin or Please wait for further Instructions");
+				result=false;
+			}
 		
+		else {
+			
+			
+			System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
+			
+			while(rs.next()) {
+				System.out.println(rs.getInt("REFERENCE_ID")+"\t"+rs.getInt("JOBSEEKER_ID"));
+				System.out.println("Select this Candidate(Yes/No):");
+				Scanner s=new Scanner(System.in);
+				String stat=s.next();
+				
+				String set="update application_and_status set HR_STATUS='yes' where REFERENCE_ID=?";
+				PreparedStatement ps1=connection.prepareStatement(set);				
+				int q=ps1.executeUpdate();
+				if(q>0)
+					System.out.println("HR Status succesfully updated for Applicant:"+rs.getInt("REFERENCE_ID"));
+				else
+					System.out.println("HR's Status updation failed:");
 		
+				}
+			 result=true;
+			}
 	}
-	catch(Exception e) {}
+		catch(Exception e) {System.out.println("error at HrShortlist() in HrDAOImp");}
+		return result;
 	}
 
 	public void rate_comment() {
@@ -103,6 +114,33 @@ public class HrDAOImp
 	
 	}
 
+	public List<ASLModel> getAllJobSeekers(){
+		
+			 ASLModel jm;
+			 List<ASLModel> data=new ArrayList<>();
+				
+				try(Connection connection=ConnectionManager.openConnection();){
+					String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'  and TR_STATUS='yes'";
+					PreparedStatement ps=connection.prepareStatement(st);				
+					ResultSet rs=ps.executeQuery();
+					//List<JobseekerModel> data=new ArrayList<>();
+					if(rs.next()==false) {
+						System.out.println(" Sorry,there are no Applications shorlisted  neither by Admin neither nor by TR \n Contact Admin or Please wait for further Instructions");
+					}else if(rs.next()==true)
+					{
+						jm=new ASLModel(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
+						data.add(jm);
+					}
+					
+					
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Error at Viewing Applications List:");
+				}
+			return data;
+		}
+	
 }
 
 

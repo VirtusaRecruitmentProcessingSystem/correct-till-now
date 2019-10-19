@@ -1,6 +1,6 @@
 show databases;
-create database vrps;
-use vrps;
+create database virtusa_recruitment_process;
+use  virtusa_recruitment_process;
 create table jobseeker(
 FIRST_NAME       VARCHAR(40) NOT NULL,
 MIDDLE_NAME      VARCHAR(40) NOT NULL,

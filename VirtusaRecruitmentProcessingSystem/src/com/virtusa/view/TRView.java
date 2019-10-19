@@ -13,28 +13,32 @@ public class TRView
 	{
 		
 		TrDAOImp trdao=new TrDAOImp();
-
-			System.out.println("1.Shortlist Candidates ");
-			System.out.println("2.Give Rating and Comment");
-			System.out.println("3.LogOut");
+		TRController trc=new TRController();
+			
+			System.out.println("1.View ShortListed Candidates");
+			System.out.println("2.Shortlist Candidates ");
+			System.out.println("3.Give Rating and Comment");
+			System.out.println("4.LogOut");
 			Scanner scan=new Scanner(System.in);
 			int choice=scan.nextInt();
 			do {
 				System.out.println("\nEnter your choice:");
 				
 				switch(choice) {
-				case 1:trdao.TrShortlist();
+				case 1:trc.getAllJobSeekers();
+				break;
+				case 2:trc.TrShortlist();
 					break;
-				case 2:trdao.rate_comment();
+				case 3:trc.rate_comment();
 						break;
-				case 3:EmployeeView eview=new EmployeeView();
+				case 4:EmployeeView eview=new EmployeeView();
 				eview.mainMenu();
 				break;
 				
 				}
 				
 			}
-			while(choice!=3);
+			while(choice!=4);
 		}
 
 

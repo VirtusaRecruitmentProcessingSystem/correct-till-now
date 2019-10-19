@@ -264,7 +264,7 @@ EXPERIENCE	int(2)
 		}	
 		}
 	}
-		catch(Exception e) {	System.out.println("error at applying dao");
+		catch(Exception e) {	System.out.println("error at Retrieving  Applications at retrieveAllApplications() ");
 		e.printStackTrace();
 		}
 		

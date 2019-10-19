@@ -14,29 +14,33 @@ public class HRView
 	public void mainMenu()
 	{
 		
-		HrDAOImp hrdao=new HrDAOImp();
+		//HrDAOImp hrdao=new HrDAOImp();
+		HRController hrc=new HRController();
 
-			System.out.println("1.Shortlist Candidates ");
-			System.out.println("2.Give Rating and Comment");
-			System.out.println("3.LogOut");
+		System.out.println("1.View ShortListed Candidates");
+		System.out.println("2.Shortlist Candidates ");
+		System.out.println("3.Give Rating and Comment");
+		System.out.println("4.LogOut");
 			Scanner scan=new Scanner(System.in);
 			int choice=scan.nextInt();
 			do {
 				System.out.println("\nEnter your choice:");
 				
 				switch(choice) {
-				case 1:hrdao.HrShortlist();
+				case 1:hrc.getAllJobSeekers();
 					break;
-				case 2:hrdao.rate_comment();
+				case 2:hrc.HrShortlist();
+					break;
+				case 3:hrc.rate_comment();
 						break;
-				case 3:EmployeeView eview=new EmployeeView();
+				case 4:EmployeeView eview=new EmployeeView();
 				eview.mainMenu();
 				break;
 				
 				}
 				
 			}
-			while(choice!=3);
+			while(choice!=4);
 		}
 
 }

@@ -41,16 +41,25 @@ public class JobseekerView {
 	static boolean flag=false;
 Scanner scanner=new Scanner(System.in);
 	int jobs_id;
-	
+	String stre;
+	boolean bill=false;
+	JobseekerValidation jv=new JobseekerValidation();
+	int option;
 	VRPSHome back=new VRPSHome();
 	
 	public void mainMenu() {
 		// TODO Auto-generated method stub
 		Scanner s=new Scanner(System.in);
-		System.out.println("\n1.JobSeeker Registration\n2.JobSeeker Login\n3.Back");
-		System.out.print("-:>Enter Your Choice:");
+		do{
+			System.out.println("\n[->]1.JobSeeker Registration\n[->]2.JobSeeker Login\n[->]3.Back");
+			System.out.print("-:>Enter Your Choice:");
 		
-		int option=s.nextInt();
+		String stre=s.next();
+		bill=jv.validNumber(stre);
+		if(!bill)
+			option=Integer.parseInt(stre);
+		}
+		while(bill);
 		
 		JobseekerView js_view=new JobseekerView();
 		if(option==1) {

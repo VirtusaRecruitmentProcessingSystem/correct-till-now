@@ -41,7 +41,7 @@ public boolean validString(String val) {
 		}
 		catch(NumberFormatException e)
 		{
-			System.out.println("-----------------Enter Data in Valid Number Format----------------");
+			System.out.println("-----------------Enter Input in Valid Number Format----------------\n");
 			
 			result=true;
 		}
@@ -70,7 +70,7 @@ public boolean validString(String val) {
 		boolean lenValidity=false,typeValidity=false;
 		
 		if(PhoneNo.length()!=10) {
-			System.out.println("-----Enter a Valid 10 Digit Mobile Number---");
+			System.out.println("-----Enter a Valid 10 Digit Mobile Number---\n");
 			lenValidity=false;
 		}
 		else
