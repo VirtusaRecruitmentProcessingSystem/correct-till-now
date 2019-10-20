@@ -25,6 +25,7 @@ public void rate_comment() {
 	// TODO Auto-generated method stub
 	String comment;
 	int rating;
+	boolean result=false;
 	Scanner scan =new Scanner(System.in);
 	
 	try(Connection connection=ConnectionManager.openConnection();){
@@ -35,8 +36,15 @@ public void rate_comment() {
 		PreparedStatement rate=connection.prepareStatement(st);
 		ResultSet rps=rate.executeQuery();
 		
+		if(rps.next()==false) {
+			//	System.out.println(" Sorry,there are no Applications shorlisted by Admin\n Contact Admin or Please wait for further Instructions");
+				result=false;
+			}
 		
-		while(rps.next()) {
+		else {
+			
+		
+		do {
 			
 			System.out.println("___________________________");
 			System.out.println("|REFERENCE_ID|JOBSEEKER_ID|");
@@ -69,12 +77,13 @@ public void rate_comment() {
 				System.out.println("Problem at giving Rating and Comment by TR");
 				
 			}
-		}
+		}while(rps.next());
 		
 		TRView backing=new TRView();
 		backing.mainMenu();
 	
-} catch (ClassNotFoundException | SQLException e) {
+		}
+	}catch (ClassNotFoundException | SQLException e) {
 	// TODO Auto-generated catch block
 	System.out.println("Error at TR's Rating and Commenting Service");
 }

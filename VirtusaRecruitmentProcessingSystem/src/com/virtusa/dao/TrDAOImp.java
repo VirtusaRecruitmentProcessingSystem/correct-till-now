@@ -20,9 +20,6 @@ public class TrDAOImp
 {
 
 	
-	
-	
-	
 		public boolean  TrShortlist()
 		{
 			boolean result=false;
@@ -44,7 +41,7 @@ public class TrDAOImp
 				
 				System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
 				
-				while(rs.next()) {
+				do {
 					System.out.println(rs.getInt("REFERENCE_ID")+"\t"+rs.getInt("JOBSEEKER_ID"));
 					System.out.println("Select this Candidate(Yes/No):");
 					Scanner s=new Scanner(System.in);
@@ -58,7 +55,7 @@ public class TrDAOImp
 					else
 						System.out.println("TR's Status updation failed:");
 			
-					}
+					}while(rs.next());
 				 result=true;
 				}
 			
