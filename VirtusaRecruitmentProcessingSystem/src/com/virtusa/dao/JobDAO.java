@@ -110,39 +110,16 @@ public class JobDAO {
 	
 	public void dropJobPost(int jobId) {
 		
-	/*	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");  
-		}
-		catch(Exception e) {}
-		
-		
-		try(Connection conn=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","hr","hr");)
-		{
-			PreparedStatement st=conn.prepareStatement("delete from job_description where JOB_ID=?");
-			st.setInt(1, jobId);
-			int rows=st.executeUpdate();
-			if(rows>0) 
-				System.out.println("deleted successfully");
-			else
-				System.out.println("deletion  UNsuccessful");
-	}
-		catch(SQLException e) {
-		System.out.println("********************* Internal Crash*******");
-		}
-		
-	
-}
-	*/
-		
 		try(Connection conn=ConnectionManager.openConnection();)
 		{
-			//(jobpost_id,designation,required_experience,REQUIRED_SKILLS,ELIGIBILITYPERCENTAGE )
-		/*	jobpost_id	int(6)	NO	PRI	
-			designation	varchar(40)	NO		
-			required_experience	decimal(2,0)	YES		*/
+			/*jobpost_id	int(6)	NO	PRI		
+			designation	varchar(40)	NO			
+			experience	int(2)	YES			
+			eligibiltyPer	decimal(2,0)	YES			
+			skillset	varchar(40)	YES					*/
 			
 			
-			PreparedStatement st=conn.prepareStatement("delete from job_description where JOB_ID=?");
+			PreparedStatement st=conn.prepareStatement("delete from job_description where JOBPOST_ID=?");
 			st.setInt(1, jobId);
 			int rows=st.executeUpdate();
 			if(rows>0) 
