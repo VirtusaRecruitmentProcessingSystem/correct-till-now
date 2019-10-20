@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import com.virtusa.controller.ApplicationController;
 import com.virtusa.controller.JobseekerController;
-
+import com.virtusa.dao.JobDAO;
 import com.virtusa.model.ApplicationModel;
 import com.virtusa.model.JobseekerModel;
 import com.virtusa.model.LoginModel;
@@ -286,7 +286,7 @@ Scanner scanner=new Scanner(System.in);
 		do {
 			
 		
-		System.out.println("\n1.Apply for Job\n2.View Job Application Status\n3.log out");
+		System.out.println("\n1.Apply for Job\n2.View Job Application Status\n3.viewallJobs\n 4.log out");
 		sar=scanner.next();
 		flag=validator.validNumber(sar);
 		if(!flag)
@@ -304,8 +304,11 @@ Scanner scanner=new Scanner(System.in);
 		case 1:applyJob(sf);
 				break;
 		case 2:viewStatus();
-				break;	
-		case 3:VRPSHome homeObj=new VRPSHome();
+				break;
+		case 3: JobDAO obj=new JobDAO();
+			obj.viewallJobs();
+		break;
+		case 4:VRPSHome homeObj=new VRPSHome();
 				homeObj.main(null);
 				break;
 			

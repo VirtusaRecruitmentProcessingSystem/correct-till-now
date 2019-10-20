@@ -34,6 +34,7 @@ import com.virtusa.integrate.ConnectionManager;
 
 public class JobDAO {
 
+	
 	String skillSet="";
 	public void addJobPost(JobEntity jentity)
 	{
@@ -81,23 +82,21 @@ public class JobDAO {
 		
 		
 	
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");  
-		}
-		catch(Exception e) {}
+		try(Connection conn=ConnectionManager.openConnection();)
+ {
 		
 		
-		try(Connection conn=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","hr","hr");)
-		{
+		//try(Connection conn=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","hr","hr");)
+		//{
 			PreparedStatement st=conn.prepareStatement("select * from job_description");
 			ResultSet rs=st.executeQuery();
 			System.out.println("=========================================");
 			while(rs.next()) {
-				int jobId=rs.getInt("JOB_ID");
+				int jobId=rs.getInt("JOBPOST_ID");
 				String designation=rs.getString("DESIGNATION");
-				int experience=rs.getInt("REQUIRED_EXPERIENCE");
-				double eligibiltyPer=rs.getDouble("ELIGIBILITYPERCENTAGE");
-				String skills=rs.getString("REQUIRED_SKILLS");
+				int experience=rs.getInt("EXPERIENCE");
+				double eligibiltyPer=rs.getDouble("eligibiltyPer");
+				String skills=rs.getString("SKILLSET");
 				
 				System.out.println("JobId :"+jobId+"\nDesignation: "+designation+"\neligibilty percentage: "+eligibiltyPer+"\nExperience: "+experience+"\nSkills: "+skills);
 				
@@ -111,7 +110,7 @@ public class JobDAO {
 	
 	public void dropJobPost(int jobId) {
 		
-		try {
+	/*	try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");  
 		}
 		catch(Exception e) {}
@@ -133,5 +132,25 @@ public class JobDAO {
 		
 	
 }
-	
-}
+	*/
+		
+		try(Connection conn=ConnectionManager.openConnection();)
+		{
+			//(jobpost_id,designation,required_experience,REQUIRED_SKILLS,ELIGIBILITYPERCENTAGE )
+		/*	jobpost_id	int(6)	NO	PRI	
+			designation	varchar(40)	NO		
+			required_experience	decimal(2,0)	YES		*/
+			
+			
+			PreparedStatement st=conn.prepareStatement("delete from job_description where JOB_ID=?");
+			st.setInt(1, jobId);
+			int rows=st.executeUpdate();
+			if(rows>0) 
+				System.out.println("deleted successfully");
+			else
+				System.out.println("deletion  UNsuccessful");
+	}
+		catch(SQLException | ClassNotFoundException e) {
+		System.out.println("********************* Internal Crash*******");
+		}
+	}}
