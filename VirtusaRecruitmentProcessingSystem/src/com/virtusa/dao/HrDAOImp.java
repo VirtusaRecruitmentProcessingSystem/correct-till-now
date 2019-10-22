@@ -27,7 +27,7 @@ public class HrDAOImp
 			//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
 			
 			
-			String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'  and TR_STATUS='yes'";
+			String st="select * from application_and_status where ADMIN_STATUS='yes'  and tr_status='yes'";
 			PreparedStatement ps=connection.prepareStatement(st);	
 			
 			ResultSet rs=ps.executeQuery();
@@ -41,25 +41,31 @@ public class HrDAOImp
 			
 			System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
 			
-			while(rs.next()) {
+			do { 
 				System.out.println(rs.getInt("REFERENCE_ID")+"\t"+rs.getInt("JOBSEEKER_ID"));
 				System.out.println("Select this Candidate(Yes/No):");
 				
 				String stat=sx.next();
-				
+				int REFERENCE_ID=rs.getInt("REFERENCE_ID");
 				String set="update application_and_status set HR_STATUS='yes' where REFERENCE_ID=?";
-				PreparedStatement ps1=connection.prepareStatement(set);				
+				PreparedStatement ps1=connection.prepareStatement(set);	
+				ps1.setInt(1, REFERENCE_ID);
+				
 				int q=ps1.executeUpdate();
 				if(q>0)
 					System.out.println("HR Status succesfully updated for Applicant:"+rs.getInt("REFERENCE_ID"));
 				else
 					System.out.println("HR's Status updation failed:");
 		
-				}
+				
+		}while(rs.next());
 			 result=true;
 			}
 	}
-		catch(Exception e) {System.out.println("error at HrShortlist() in HrDAOImp");}
+		catch(Exception e) {
+			System.out.println("error at HrShortlist() in HrDAOImp");
+		e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -122,13 +128,13 @@ public class HrDAOImp
 			 List<ASLModel> data=new ArrayList<>();
 				
 				try(Connection connection=ConnectionManager.openConnection();){
-					String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'  and TR_STATUS='yes'";
+					String st="select * from application_and_status where ADMIN_STATUS='yes'  and TR_STATUS='yes'";
 					PreparedStatement ps=connection.prepareStatement(st);				
 					ResultSet rs=ps.executeQuery();
-					//List<JobseekerModel> data=new ArrayList<>();
+					
 					if(rs.next()==false) {
 						System.out.println(" Sorry,there are no Applications shorlisted  neither by Admin neither nor by TR \n Contact Admin or Please wait for further Instructions");
-					}else if(rs.next()==true)
+					}else //if(rs.next()==true)
 					{
 						jm=new ASLModel(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
 						data.add(jm);
