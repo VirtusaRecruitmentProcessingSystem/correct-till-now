@@ -21,6 +21,7 @@ public class shortlistEntity {
 		this.trstatus=trstatus;
 		this.jobpostID=jobpostID;
 		this.jobseekerID=jobseekerID;
+		this.refID=refID;//error wa here
 	}
 	
 	

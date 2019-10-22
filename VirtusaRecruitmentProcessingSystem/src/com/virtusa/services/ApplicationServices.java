@@ -14,7 +14,7 @@ import com.virtusa.model.SessionForwading;
 
 public class ApplicationServices {
 //ApplicationModel application
-	
+	Scanner sx=new Scanner(System.in);
 	ApplicationDAO appDAO=new ApplicationDAO();
 	
 	
@@ -49,7 +49,7 @@ public List<ApplicationModel> getApplications() {
 		}
 		else
 		{
-			try(Scanner scan=new Scanner(System.in);){
+			try{
 		
 		System.out.println("REFERENCE_ID	|	NAME	|	DATE_OF_BIRTH	|	QUALIFICATION	|		SKILLS		|YEAR_OF_PASSING|PERCENTAGE|EXPERIENCE|JOBPOST_ID");
 		
@@ -66,7 +66,7 @@ public List<ApplicationModel> getApplications() {
 
 			System.out.println(o.getREFERENCE_ID()+"|"+fullname+"|"+o.getDatex()+"|"+o.getQualification()+"|"+allSKills+"|"+o.getPassYear()+"|"+o.getPercentage()+"|"+o.getExperience()+"|"+o.getJobpostId());
 			System.out.println("Select this Candidate(Yes/No):");
-			String status=scan.next();
+			String status=sx.next();
 			
 			shortlistEntity slModel=new shortlistEntity(o.getREFERENCE_ID(),o.getJobseekerID(),o.getJobpostId(),status,null,null);
 			
@@ -75,6 +75,9 @@ public List<ApplicationModel> getApplications() {
 			
 		});
 		}
+			catch(Exception ee) {
+				System.out.println(" Error at ApplicationServices---AdminShortlistServices()");
+			}
 	}
 return true;					
 	}

@@ -8,12 +8,12 @@ public class FactoryTrHelper {
 			
 			public  TrDAOImp createTRDAO(){
 				TrDAOImp trDAO=new TrDAOImp();
-				return trDAO;
+				return new TrDAOImp();
 				
 			}
 			public static TRServices createTRService(){
 				TRServices trService=new TRservicesImpl();
-				return trService;
+				return new TRservicesImpl();
 			}
 
 		

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
+
 
 import com.virtusa.integrate.ConnectionManager;
 import com.virtusa.model.LoginModel;

@@ -7,7 +7,7 @@ import com.virtusa.dao.AdminDAO;
 import com.virtusa.dao.JobDAO;
 
 public class AdminServicesImpl implements AdminServices{
-	
+	Scanner sx=new Scanner(System.in);
 	AdminDAO adminDAO=new AdminDAO();
 
 	public boolean AdminShortlistServices() {
@@ -37,7 +37,7 @@ public class AdminServicesImpl implements AdminServices{
 		jobServices js=new JobServiceImpl();
 		
 		System.out.println("Enter jobPostID of JobPost to be deleted:");
-		Scanner sx=new Scanner(System.in);
+
 		int del=sx.nextInt();
 		
 		JobDAO delete=new JobDAO();

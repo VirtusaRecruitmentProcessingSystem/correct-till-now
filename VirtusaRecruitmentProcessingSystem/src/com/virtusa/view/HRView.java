@@ -10,7 +10,7 @@ import com.vrps.authentication.UserAuthentication;
 
 public class HRView 
 {		
-	
+	Scanner scan=new Scanner(System.in);
 	public void mainMenu()
 	{
 		
@@ -21,7 +21,7 @@ public class HRView
 		System.out.println("2.Shortlist Candidates ");
 		System.out.println("3.Give Rating and Comment");
 		System.out.println("4.LogOut");
-			Scanner scan=new Scanner(System.in);
+			
 			int choice=scan.nextInt();
 			do {
 				System.out.println("\nEnter your choice:");

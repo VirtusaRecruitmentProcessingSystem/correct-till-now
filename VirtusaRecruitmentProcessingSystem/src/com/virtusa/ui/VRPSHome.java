@@ -8,7 +8,7 @@ import com.virtusa.view.JobseekerView;
 
 public class VRPSHome
 {
-
+	static Scanner swwe=new Scanner(System.in);
 public static void main(String args[])
 	{
 	System.out.println("<-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><-><->");
@@ -18,13 +18,13 @@ public static void main(String args[])
 	int  i=0;String ss;
 	boolean bill=false;
 	JobseekerValidation jv=new JobseekerValidation();
-	Scanner s=new Scanner(System.in);
+
 	
 	
 	do {
 		System.out.println("\n[->]1.JobSeeker\n[->]2.Employee\n[->]3.Admin\n[->]4.Exit");
 		System.out.print("-:>Enter Your Choice:");
-		ss=s.next();
+		ss=swwe.next();
 		bill=jv.validNumber(ss);
 		if(!bill)
 			i=Integer.parseInt(ss);
@@ -50,7 +50,7 @@ public static void main(String args[])
 	{
 		System.exit(1);
 	}
-	s.close();
+
 	}
 
 }

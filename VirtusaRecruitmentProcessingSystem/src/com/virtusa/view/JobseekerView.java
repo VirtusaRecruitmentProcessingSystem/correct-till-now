@@ -52,12 +52,12 @@ Scanner scanner=new Scanner(System.in);
 	
 	public void mainMenu() {
 		// TODO Auto-generated method stub
-		Scanner s=new Scanner(System.in);
+
 		do{
 			System.out.println("\n[->]1.JobSeeker Registration\n[->]2.JobSeeker Login\n[->]3.Back");
 			System.out.print("-:>Enter Your Choice:");
 		
-		String stre=s.next();
+		String stre=scanner.next();
 		bill=jv.validNumber(stre);
 		if(!bill)
 			option=Integer.parseInt(stre);
@@ -188,7 +188,7 @@ Scanner scanner=new Scanner(System.in);
 		choice=scanner.next();
 			try {
 				ichoice=Integer.parseInt(choice);
-				//stat=false;
+				stat=false;
 				}
 			catch(Exception e) {
 				stat=true;
@@ -280,7 +280,7 @@ Scanner scanner=new Scanner(System.in);
 	}
 
 	public void MenuAfterLogin(SessionForwading sf) {
-		Scanner s=new Scanner(System.in);
+
 		String sar;
 		int choice=0;
 		do {

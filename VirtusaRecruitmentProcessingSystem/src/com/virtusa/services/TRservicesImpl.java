@@ -53,11 +53,12 @@ public boolean TrShortlist() {
 		if(jobseekerModelList.isEmpty()) 
 		{
 			System.out.println(" Sorry,there are no Applications to ShortList\n Contact Admin or Please wait for further Instructions");
-			result=false;
+			result=true;
 		}
 	else
 		{
 		result=trdao.TrShortlist();
+		//result=true;
 		}
 		return result;
 			

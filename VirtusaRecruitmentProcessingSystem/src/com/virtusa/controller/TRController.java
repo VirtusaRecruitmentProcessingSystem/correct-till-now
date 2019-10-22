@@ -35,6 +35,7 @@ public class TRController
 			public  void TrShortlist() {
 
 				boolean bx=trServices.TrShortlist();
+				
 				if(bx || !bx)
 					trview.mainMenu();
 				

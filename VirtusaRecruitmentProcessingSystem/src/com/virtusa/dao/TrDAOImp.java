@@ -18,49 +18,49 @@ import com.virtusa.view.TRView;
 
 public class TrDAOImp 
 {
-
+	Scanner wwe=new Scanner(System.in);
 	
 		public boolean  TrShortlist()
 		{
 			boolean result=false;
 			try(Connection connection=ConnectionManager.openConnection();){
-				//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
-				
-				
 				String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'";
 				PreparedStatement ps=connection.prepareStatement(st);	
 				
 				ResultSet rs=ps.executeQuery();
 				if(rs.next()==false) {
-				//	System.out.println(" Sorry,there are no Applications shorlisted by Admin\n Contact Admin or Please wait for further Instructions");
-					result=false;
+					result=true;
 				}
 			
 			else {
 				
-				
-				System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
-				
 				do {
+					System.out.println("REFERENCE_ID|JOBSEEKER_ID" );
 					System.out.println(rs.getInt("REFERENCE_ID")+"\t"+rs.getInt("JOBSEEKER_ID"));
 					System.out.println("Select this Candidate(Yes/No):");
-					Scanner s=new Scanner(System.in);
-					String stat=s.next();
+					
+					int REFERENCE_ID=rs.getInt("REFERENCE_ID");
+					String stat=wwe.next();
 					
 					String set="update application_and_status set TR_STATUS='yes' where REFERENCE_ID=?";
-					PreparedStatement ps1=connection.prepareStatement(set);				
-					int q=ps1.executeUpdate();
+					PreparedStatement ps11=connection.prepareStatement(set);
+					ps11.setInt(1, REFERENCE_ID);
+					
+					
+					int q=ps11.executeUpdate();
 					if(q>0)
 						System.out.println("TR Status succesfully updated for Applicant:"+rs.getInt("REFERENCE_ID"));
 					else
 						System.out.println("TR's Status updation failed:");
 			
 					}while(rs.next());
-				 result=true;
+				
+				result=true;
 				}
-			
 			}
-			catch(Exception e) {System.out.println("error at TrShortlist() in TrDAOImp");}
+			catch(Exception e) {System.out.println("error at TrShortlist() in TrDAOImp");
+			e.printStackTrace();}
+			
 			return result;
 		
 		}
@@ -87,13 +87,13 @@ public class TrDAOImp
 			 List<ASLModel> data=new ArrayList<>();
 				
 				try(Connection connection=ConnectionManager.openConnection();){
-					String st="select REFERENCE_ID,JOBSEEKER_ID from application_and_status where ADMIN_STATUS='yes'";
+					String st="select * from application_and_status where ADMIN_STATUS='yes'";
 					PreparedStatement ps=connection.prepareStatement(st);				
 					ResultSet rs=ps.executeQuery();
 					//List<JobseekerModel> data=new ArrayList<>();
 					if(rs.next()==false) {
 						System.out.println(" Sorry,there are no Applications shorlisted by Admin\n Contact Admin or Please wait for further Instructions");
-					}else if(rs.next()==true)
+					}else //if(rs.next()==true)
 					{
 						jm=new ASLModel(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
 						data.add(jm);
@@ -114,7 +114,7 @@ public class TrDAOImp
 			// TODO Auto-generated method stub
 			String comment;
 			int rating;
-			Scanner scan =new Scanner(System.in);
+
 			
 			try(Connection connection=ConnectionManager.openConnection();){
 				
@@ -137,9 +137,9 @@ public class TrDAOImp
 					
 					
 					System.out.println("Enter Rating ( out of 5 ) for this candidate:");
-					rating=scan.nextInt();
+					rating=wwe.nextInt();
 					System.out.println("Enter Comments on this candidate:");
-					comment=scan.next();
+					comment=wwe.next();
 					
 					
 					String setter="update table RATING_COMMENT set TR_RATING=?,TR_RATING=? where JOBSEEKER_ID=?";

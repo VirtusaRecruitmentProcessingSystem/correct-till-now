@@ -15,16 +15,18 @@ import com.vrps.authentication.UserAuthentication;
 
 public class AdminView {
 
+	Scanner scannerr=new Scanner(System.in);
+	
 	JobseekerValidation jv=new JobseekerValidation();
 	public void mainMenu() {
 		int y=0;
 		boolean bill=false;
 		String stre;
-		Scanner sc=new Scanner(System.in);
+		
 		do {
 			System.out.println("------------  Admin  ------------\n[->]1.Admin Login \n[->]2.Back");
 			System.out.print("Enter Choice:");
-			stre=sc.next();
+			stre=scannerr.next();
 			bill=jv.validNumber(stre);
 			if(!bill)
 			y=Integer.parseInt(stre);	
@@ -40,15 +42,15 @@ public class AdminView {
 	}
 	
 	public void method() {
-		Scanner scannerx=new Scanner(System.in);
+
 		System.out.println("---------Admin Login---------");
 		AdminView admiView=new AdminView();
 
 		System.out.print("Enter UserName:");
-		String username=scannerx.next();
+		String username=scannerr.next();
 
 		System.out.print("Enter Password:");
-		String password=scannerx.next();
+		String password=scannerr.next();
 
 		LoginModel lm=new LoginModel(username,password);
 		//Authentication replacement and Admin's Main menu formatting 	
@@ -60,7 +62,9 @@ public class AdminView {
 		if(sf.isStatus())
 		main(sf);
 		else
-			method();
+			mainMenu();
+		
+	
 			
 	}
 	
@@ -70,7 +74,7 @@ public class AdminView {
 		AdminController adcontroller=new AdminController();
 		String ss;
 		boolean bill;
-		Scanner scannerr=new Scanner(System.in);
+		
 
 		if(sf.isStatus()) {
 			/*
@@ -82,7 +86,7 @@ public class AdminView {
 			*/
 			int choice=0;
 			do {
-				do {
+				//do {
 				System.out.println("\n1.Add Job Post");
 				System.out.println("2.delete job post");
 				System.out.println("3.Give Rating and Comment");
@@ -90,14 +94,15 @@ public class AdminView {
 				System.out.println("5.LogOut");
 				System.out.print("\nEnter your choice:");
 				
-				ss=scannerr.nextLine();
+				/*ss=scannerr.next();
 					bill=jv.validNumber(ss);
 					if(!bill)
 						choice=Integer.parseInt(ss);
 					
 					}while(bill);
-				
-				
+				*/
+				 
+				choice=scannerr.nextInt();
 				switch(choice) {
 				case 1:adcontroller.addJobPost();
 				break;
@@ -114,10 +119,11 @@ public class AdminView {
 					break;
 				default:System.out.print("Enter Valid Option\n");
 				}
+				
 			}
 			while(choice!=5);
 		}
-		scannerr.close();
+		
 }
 	
 }

@@ -233,7 +233,7 @@ EXPERIENCE	int(2)
 		ResultSet retriveSet=retriveStatement.executeQuery();
 		
 		if(retriveSet.next() == false)
-			System.out.println("Sorry, there are no applications to short list");
+			System.out.println("Sorry, there are no applications to view\n");
 		else {
 			do
 			 	{
@@ -272,7 +272,7 @@ EXPERIENCE	int(2)
 			
 		}
 	}
-		catch(Exception e) {	System.out.println("error at Retrieving  Applications at retrieveAllApplications() ");
+		catch(Exception e) {	System.out.println("error at Retrieving  Applications at retrieveAllApplications() \n");
 		e.printStackTrace();
 		}
 		

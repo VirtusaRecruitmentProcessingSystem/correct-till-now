@@ -7,7 +7,7 @@ import com.virtusa.model.SessionForwading;
 
 
 public class AuthenticationView {
-
+	Scanner scanner1=new Scanner(System.in);
 //public static void main(String[] args) {
 	
 	// try putting Login model for username,password and then retrieving data from it
@@ -16,7 +16,7 @@ public class AuthenticationView {
 
 		
 		System.out.println();
-		Scanner scanner1=new Scanner(System.in);
+		
 		System.out.print("Enter UserName:");
 		String username1=scanner1.next();
 		System.out.print("Enter Password:");

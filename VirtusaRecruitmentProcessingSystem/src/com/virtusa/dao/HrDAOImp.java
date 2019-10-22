@@ -18,6 +18,8 @@ import com.virtusa.view.HRView;
 public class HrDAOImp
 {
 
+	Scanner sx=new Scanner(System.in);
+	
 	public boolean  HrShortlist()
 	{
 		boolean result=false;
@@ -42,8 +44,8 @@ public class HrDAOImp
 			while(rs.next()) {
 				System.out.println(rs.getInt("REFERENCE_ID")+"\t"+rs.getInt("JOBSEEKER_ID"));
 				System.out.println("Select this Candidate(Yes/No):");
-				Scanner s=new Scanner(System.in);
-				String stat=s.next();
+				
+				String stat=sx.next();
 				
 				String set="update application_and_status set HR_STATUS='yes' where REFERENCE_ID=?";
 				PreparedStatement ps1=connection.prepareStatement(set);				
@@ -65,7 +67,7 @@ public class HrDAOImp
 		// TODO Auto-generated method stub
 		String comment;
 		int rating;
-		Scanner scan =new Scanner(System.in);
+		
 		
 		try(Connection connection=ConnectionManager.openConnection();){
 			//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
@@ -84,9 +86,9 @@ public class HrDAOImp
 				
 				System.out.println(rps.getInt("REFERENCE_ID")+"\t|"+rps.getInt("JOBSEEKER_ID")+"\n");
 				System.out.println("Enter Rating ( out of 5 ) for this candidate:");
-				rating=scan.nextInt();
+				rating=sx.nextInt();
 				System.out.println("Enter Comments on this candidate:");
-				comment=scan.next();
+				comment=sx.next();
 				
 				String setter="update table RATING_COMMENT set HR_RATING=?,R_COMMENT=? where JOBSEEKER_ID=?";
 				//String setter="insert into RATING_COMMENT (JOBSEEKER_ID,HR_RATING,R_COMMENT) values(?,?,?)";

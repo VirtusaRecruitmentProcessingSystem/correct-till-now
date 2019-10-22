@@ -15,6 +15,7 @@ import com.virtusa.view.TRView;
 
 
 public class AdminDAO {
+	Scanner scan =new Scanner(System.in);
 	
 private List<AdminEntity> List=null;
 AdminEntity admin=new AdminEntity();
@@ -26,7 +27,7 @@ public void rate_comment() {
 	String comment;
 	int rating;
 	boolean result=false;
-	Scanner scan =new Scanner(System.in);
+	
 	
 	try(Connection connection=ConnectionManager.openConnection();){
 		//String query1="select REFERENCE_ID,JOBSEEKER_ID from applications";
@@ -115,7 +116,7 @@ HR_STATUS             VARCHAR2(3)
 		boolean res=false;
 		
 		
-		try(      Connection conn=ConnectionManager.openConnection();   )
+		try(      Connection conn = ConnectionManager.openConnection();   )
 		{
 			String query="insert into application_and_status values(?,?,?,?,?,?)";
 			PreparedStatement sp=conn.prepareStatement(query);

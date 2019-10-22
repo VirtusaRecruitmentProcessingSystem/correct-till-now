@@ -17,7 +17,7 @@ ELIGIBILITYPERCENTAGE          NUMBER(2,2)
  */
 
 public class JobServiceImpl implements jobServices {
-
+	Scanner input=new Scanner(System.in);
 	
 	@Override
 	public void viewjobPosts() {
@@ -41,7 +41,7 @@ public class JobServiceImpl implements jobServices {
 		 double eligibilityPercentage;
 		 List<String> skills;
 
-			Scanner input=new Scanner(System.in);
+		
 			
 			System.out.println("-------------------");
 			System.out.println("  Adding Job Post  ");
